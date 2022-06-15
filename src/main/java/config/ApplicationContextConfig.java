@@ -5,12 +5,12 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.o7planning.springmvcshoppingcart.dao.AccountDAO;
-import org.o7planning.springmvcshoppingcart.dao.OrderDAO;
-import org.o7planning.springmvcshoppingcart.dao.ProductDAO;
-import org.o7planning.springmvcshoppingcart.dao.impl.AccountDAOImpl;
-import org.o7planning.springmvcshoppingcart.dao.impl.OrderDAOImpl;
-import org.o7planning.springmvcshoppingcart.dao.impl.ProductDAOImpl;
+import dao.AccountDAO;
+import dao.OrderDAO;
+import dao.ProductDAO;
+import dao.impl.AccountDAOImpl;
+import dao.impl.OrderDAOImpl;
+import dao.impl.ProductDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +26,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("org.o7planning.springmvcshoppingcart.*")
+@ComponentScan("org.*")
 @EnableTransactionManagement
 // Load to Environment.
 @PropertySource("classpath:ds-hibernate-cfg.properties")
@@ -37,13 +37,13 @@ public class ApplicationContextConfig {
     @Autowired
     private Environment env;
 
-    @Bean
-    public ResourceBundleMessageSource messageSource() {
-        ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-        // Load property in message/validator.properties
-        rb.setBasenames(new String[] { "messages/validator" });
-        return rb;
-    }
+//    @Bean
+//    public ResourceBundleMessageSource messageSource() {
+//        ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+//        // Load property in message/validator.properties
+//        rb.setBasenames(new String[] { "messages/validator" });
+//        return rb;
+//    }
 
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
@@ -62,6 +62,16 @@ public class ApplicationContextConfig {
         // commonsMultipartResolver.setMaxUploadSize(...);
 
         return commonsMultipartResolver;
+    }
+
+    // Load property in message/validator.properties
+
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+        // Load property in message/validator.properties
+        rb.setBasenames(new String[] { "messages/validator"});
+        return rb;
     }
 
     @Bean(name = "dataSource")
