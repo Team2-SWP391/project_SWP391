@@ -28,6 +28,39 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin.css"/>" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function () {
+                if (this.checked) {
+                    checkbox.each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    checkbox.each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+            checkbox.click(function () {
+                if (!this.checked) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
+        function ConfirmDelete(id)
+        {
+            var x = confirm("Are you sure you want to delete?");
+            if (x == true){
+                window.location.href = 'delete?id='+id
+            }
+
+        }
+    </script>
 
 </head>
 
@@ -211,18 +244,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Area Chart Example-->
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-area"></i>
-                    Area Chart Example</div>
-                <div class="card-body">
-                    <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
@@ -252,6 +273,18 @@
                             </tr>
                             </tfoot>
                             <tbody>
+                            <c:forEach items="${order}" var="o">
+                                <tr>
+                                    <th>${o.getOid()}</th>
+                                    <th>${o.getCid()}</th>
+                                    <th>${o.getAmount()}</th>
+                                    <th>${o.getShipping_address()}</th>
+                                    <th>${o.getOrder_address()}</th>
+                                    <th><a href="/admin/upload?id=${o.getOid()}" class="fas fa-edit"></a>
+                                        <a href="" class="fas fa-trash-alt"/>
+                                    </th>
+                                </tr>
+                            </c:forEach>
 
                             </tbody>
                         </table>
@@ -262,6 +295,56 @@
 
         </div>
         <!-- /.container-fluid -->
+        <!-- Edit Modal HTML -->
+        <div id="addEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="add" method="post">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>ID</label>
+                                <input value="" name="id" type="text" class="form-control" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input value="" name="name" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input value="" name="image" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input value="" name="price" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Title</label>
+                                <textarea name="title" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select name="category" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listC}" var="o">
+                                        <option value="${o.getcID()}">${o.getcName()}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- Sticky Footer -->
         <footer class="sticky-footer">

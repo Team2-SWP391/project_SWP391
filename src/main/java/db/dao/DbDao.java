@@ -1,6 +1,8 @@
 package db.dao;
 
 import Model.Human;
+import Model.Order;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +24,7 @@ public class DbDao {
         return new BCryptPasswordEncoder();
     }
     protected Connection connection;
-   public ResourceBundle r = ResourceBundle.getBundle("dao");
+    public ResourceBundle r = ResourceBundle.getBundle("dao");
 
     public DbDao() {
         try {
@@ -34,17 +37,32 @@ public class DbDao {
             Logger.getLogger(DbDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<String> getList(){
-        ArrayList<String> a=new ArrayList<>();;
+    public List<Order> getList(){
+        List<Order> list = new ArrayList<>();
         try {
-            PreparedStatement p = connection.prepareStatement("select * from login");
+            PreparedStatement p = connection.prepareStatement("SELECT [Oid]\n" +
+                    "      ,[C_id]\n" +
+                    "      ,[ammount]\n" +
+                    "      ,[Shipping_address]\n" +
+                    "      ,[Order_address]\n" +
+                    "      ,[Order_date]\n" +
+                    "      ,[Order_status]\n" +
+                    "  FROM [test].[dbo].[orders]");
             ResultSet r=p.executeQuery();
+            System.out.println("hello");
             while(r.next())
-               a.add(r.getString("name").trim());
+               list.add(new Order(r.getInt(1),
+                       r.getInt(2),
+                       r.getDouble(3),
+                       r.getString(4),
+                       r.getString(5),
+                       r.getDate(6),
+                       r.getInt(7)));
+            System.out.println("done");
         }catch (Exception e){
             System.out.println("happened error!");
         }
-        return a;
+        return list;
     }
     public Human GetUser(String user){
         try {
