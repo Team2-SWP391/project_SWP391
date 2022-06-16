@@ -64,6 +64,34 @@ public class DbDao {
         }
         return list;
     }
+    public Order getOrderByOid(String Oid){
+        Order o = new Order();
+        try {
+            PreparedStatement p = connection.prepareStatement("SELECT [Oid]\n" +
+                    "      ,[C_id]\n" +
+                    "      ,[ammount]\n" +
+                    "      ,[Shipping_address]\n" +
+                    "      ,[Order_address]\n" +
+                    "      ,[Order_date]\n" +
+                    "      ,[Order_status]\n" +
+                    "  FROM [test].[dbo].[orders] where Oid = ?");
+            p.setString(1, Oid);
+            ResultSet r=p.executeQuery();
+            if(r.next()){
+                return new Order(r.getInt(1),
+                        r.getInt(2),
+                        r.getDouble(3),
+                        r.getString(4),
+                        r.getString(5),
+                        r.getDate(6),
+                        r.getInt(7));
+            }
+
+        }catch (Exception e){
+            System.out.println("happened error!");
+        }
+        return null;
+    }
     public Human GetUser(String user){
         try {
             PreparedStatement p = connection.prepareStatement("select * from DBlogin where username=?");

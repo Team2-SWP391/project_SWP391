@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @ComponentScan(basePackages = {"db.dao", "service"})
@@ -22,14 +23,26 @@ public class homeController{
     DbDao db;
     @GetMapping("home")
     public  String homeC(HttpServletRequest request, HttpServletResponse response, Model m){
-        System.out.println( db.getList().size());
+
         request.setAttribute("order", db.getList());
 
         return "index";
     }
     @GetMapping("upload")
-    public String Upload(){
+    public String Upload(HttpServletRequest request, HttpServletResponse response, Model m){
+        String id = request.getParameter("Oid");
+        request.setAttribute("orderE", db.getOrderByOid(id));
         return "edit";
+    }
+    @GetMapping("edit")
+    public void EditC(HttpServletRequest request, HttpServletResponse response, Model m){
+        String id = request.getParameter("Oid");
+        request.setAttribute("orderE", db.getOrderByOid(id));
+        try {
+            response.sendRedirect("/admin/upload");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

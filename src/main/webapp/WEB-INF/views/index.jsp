@@ -254,33 +254,33 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Price order</th>
+                                <th>Shipping address</th>
+                                <th>Order address</th>
+                                <th>Order date</th>
+                                <th>status</th>
+                                <th>button</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Price order</th>
+                                <th>Shipping address</th>
+                                <th>Order address</th>
+                                <th>Order date</th>
+                                <th>status</th>
+                                <th>button</th>
                             </tr>
                             </tfoot>
                             <tbody>
                             <c:forEach items="${order}" var="o">
                                 <tr>
-                                    <th>${o.getOid()}</th>
-                                    <th>${o.getCid()}</th>
                                     <th>${o.getAmount()}</th>
                                     <th>${o.getShipping_address()}</th>
                                     <th>${o.getOrder_address()}</th>
-                                    <th><a href="/admin/upload?id=${o.getOid()}" class="fas fa-edit"></a>
+                                    <th>${o.getOrder_date()}</th>
+                                    <th>${o.getStatus()}</th>
+                                    <th><a href="/admin/upload?Oid=${o.getOid()}" class="fas fa-edit"></a>
                                         <a href="" class="fas fa-trash-alt"/>
                                     </th>
                                 </tr>
