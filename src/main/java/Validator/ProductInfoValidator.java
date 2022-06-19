@@ -1,8 +1,8 @@
 package Validator;
 
-import dao.ProductDAO;
 import Entity.Product;
 import Model.ProductInfo;
+import dao.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

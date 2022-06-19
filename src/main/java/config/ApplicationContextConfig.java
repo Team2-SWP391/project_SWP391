@@ -1,16 +1,10 @@
 package config;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.hibernate.SessionFactory;
-import dao.AccountDAO;
 import dao.OrderDAO;
 import dao.ProductDAO;
-import dao.impl.AccountDAOImpl;
-import dao.impl.OrderDAOImpl;
-import dao.impl.ProductDAOImpl;
+import impl.OrderDAOImpl;
+import impl.ProductDAOImpl;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
 @Configuration
 @ComponentScan("org.*")
 @EnableTransactionManagement
@@ -36,14 +33,6 @@ public class ApplicationContextConfig {
     // and stores all the properties loaded by the @PropertySource
     @Autowired
     private Environment env;
-
-//    @Bean
-//    public ResourceBundleMessageSource messageSource() {
-//        ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-//        // Load property in message/validator.properties
-//        rb.setBasenames(new String[] { "messages/validator" });
-//        return rb;
-//    }
 
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
@@ -103,7 +92,7 @@ public class ApplicationContextConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan(new String[] { "org.o7planning.springmvcshoppingcart.entity" });
+        factoryBean.setPackagesToScan(new String[] { "Entity" });
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(properties);
         factoryBean.afterPropertiesSet();
@@ -121,10 +110,10 @@ public class ApplicationContextConfig {
         return transactionManager;
     }
 
-    @Bean(name = "accountDAO")
-    public AccountDAO getApplicantDAO() {
-        return new AccountDAOImpl();
-    }
+//    @Bean(name = "accountDAO")
+//    public AccountDAO getApplicantDAO() {
+//        return new AccountDAOImpl();
+//    }
 
     @Bean(name = "productDAO")
     public ProductDAO getProductDAO() {
@@ -136,9 +125,9 @@ public class ApplicationContextConfig {
         return new OrderDAOImpl();
     }
 
-    @Bean(name = "accountDAO")
-    public AccountDAO getAccountDAO()  {
-        return new AccountDAOImpl();
-    }
+//    @Bean(name = "accountDAO")
+//    public AccountDAO getAccountDAO()  {
+//        return new AccountDAOImpl();
+//    }
 
 }

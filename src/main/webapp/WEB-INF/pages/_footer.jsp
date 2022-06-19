@@ -8,8 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="footer-container">
 
-    @Copy right <a href="http://o7planning.org" target="_blank">o7planning.org</a>
-    <br>
-    See more <a>demo</a>
+    @Copy right
 
 </div>

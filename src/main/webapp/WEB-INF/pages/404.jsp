@@ -1,13 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Admin
-  Date: 6/7/2022
-  Time: 11:32 PM
+  User: HOANG ANH
+  Date: 6/4/2022
+  Time: 4:47 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,9 +15,13 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
 
 </head>
+<style>
+body {
+background-color: #95c2de;
+}
+
+</style>
 <body>
-
-
 <jsp:include page="_header.jsp" />
 <jsp:include page="_menu.jsp" />
 
@@ -29,6 +31,5 @@
 
 
 <jsp:include page="_footer.jsp" />
-
 </body>
 </html>
