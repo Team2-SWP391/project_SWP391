@@ -5,10 +5,6 @@ package Model;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 public class User {
     private String id;
     private String email;

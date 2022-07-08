@@ -3,16 +3,12 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
-<<<<<<< Updated upstream
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/shoppingCart.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/shoppingCartConfirmation.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Order_detail_manager.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/category.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/hello.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/reset_password.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
-=======
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/hello.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
->>>>>>> Stashed changes
       </map>
     </option>
   </component>

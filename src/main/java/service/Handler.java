@@ -1,22 +1,12 @@
 package service;
 
 import Model.Constant;
-import org.springframework.security.core.userdetails.User;
+import Model.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.io.IOException;
 @Service
@@ -51,9 +41,10 @@ public class Handler {
                         .add("redirect_uri",Constant.GOOGLE_REDIRECT_URI).add("code", code)
                         .add("grant_type", Constant.GOOGLE_GRANT_TYPE).build())
                 .execute().returnContent().asString();//execute là submit tới google và trả về 1 respone dạng json
+
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);//chuyển đổi string dang json sang object
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");//chỉ nhận vào access_token ,other(id_token,scope,expire)
-//        System.out.println(response);
+
         return accessToken;
     }
     public User getUserInfo(final String accessToken) throws IOException {//user access_token to get user's infor

@@ -1,31 +1,40 @@
 package service;
+import java.util.Arrays;
 import java.util.Date;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jwt.JWT;
+import db.dao.DbDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Service
 public class JwtService {
     public static final String USERNAME = "username";
     public static final String SECRET_KEY = "nguyenhoanganh05092001he1536071111111111111111111111111111111111111111";
     public static final int EXPIRE_TIME = 86400000;
-
+    @Autowired
+    DbDao dao;
     public String generateTokenLogin(String username) {
         String token = null;
         try {
-            // Create HMAC signer
             JWSSigner signer = new MACSigner(generateShareSecret());
             JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
-            builder.claim("roles","USER");
+            builder.claim("roles",dao.getRole(username));
             builder.claim(USERNAME, username);
             builder.expirationTime(generateExpirationDate());
             JWTClaimsSet claimsSet = builder.build();
             SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet);
-            // Apply the HMAC protection
             signedJWT.sign(signer);
             token = signedJWT.serialize();
         } catch (Exception e) {
@@ -44,7 +53,6 @@ public class JwtService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("claims ="+claims.getClaims());
         return claims;
     }
     private Date generateExpirationDate() {

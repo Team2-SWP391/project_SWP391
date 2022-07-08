@@ -1,7 +1,5 @@
 package Model;
-
 import java.util.Date;
-
 public class Order {
     private int Oid;
     private int Cid;
@@ -9,12 +7,11 @@ public class Order {
     private String shipping_address;
     private String order_address;
     private Date order_date;
-    private Boolean status;
+    private int status;
     public Order(){
 
     }
-
-    public Order(int oid, int cid, double amount, String shipping_address, String order_address, Date order_date, Boolean status) {
+    public Order(int oid, int cid, double amount, String shipping_address, String order_address, Date order_date, int status) {
         Oid = oid;
         Cid = cid;
         this.amount = amount;
@@ -67,16 +64,13 @@ public class Order {
     public Date getOrder_date() {
         return order_date;
     }
-
     public void setOrder_date(Date order_date) {
         this.order_date = order_date;
     }
-
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
-
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

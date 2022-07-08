@@ -1,6 +1,7 @@
 package service;
 
 import Model.Human;
+import com.laptrinh.ConfigSecurity;
 import db.dao.DbDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,9 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -23,7 +22,12 @@ public class UserConfig implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Human h=dao.GetUser(username);
         if(h==null){
-           throw new UsernameNotFoundException("login failed!");
+            ConfigSecurity.notify="invalid username and password";
+            return null;
+        }
+        else if(h.isStatus()==false){
+            ConfigSecurity.notify="your account inactive";
+            return null;
         }
         else{
             List<GrantedAuthority> l = new ArrayList<>();
